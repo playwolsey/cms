@@ -1,5 +1,5 @@
 .qr-maker{
-    background: #fff;
+    background: rgba(255, 255, 255, .9);
 }
 .qr-maker .toolbox{
     margin-bottom: 10px;
