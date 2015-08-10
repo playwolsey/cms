@@ -25,8 +25,11 @@ body{background:url(/images/bg.jpg) #00B48A 0 0 no-repeat;background-attachment:
     border: 0;
 }
 .navbar .navbar-brand{
-    color: #fff;
+    color: #00B58A;
     width: 100px;
+}
+.navbar .navbar-brand:visited{
+    color: #00B58A;
 }
 .navbar .navbar-brand:hover{
     color: #fff;
