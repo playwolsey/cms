@@ -11,4 +11,16 @@ function index(req, res) {
     });
 }
 
+function upload(req, res) {
+    res.json({
+        title: '图片空间',
+        menu: 'images',
+        url: '',
+        file_path: '',
+        data: {
+        }
+    })
+}
+
 exports.index = index;
+exports.upload = upload;
