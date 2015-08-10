@@ -5,10 +5,10 @@
  */
 
 function index(req, res) {
-    res.render({
+    res.render('members/members', {
         title: '开发人员',
         menu: 'members'
     });
 }
 
-export.index = index;
+exports.index = index;
