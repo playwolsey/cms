@@ -1,0 +1,26 @@
+extends ../inc/layout
+
+block append head
+    link(rel="stylesheet",href="/vendors/dropzone/dropzone.css")
+    link(rel="stylesheet",href="/stylesheets/images/images.css")
+
+block content
+    div.container
+        .imgbox
+            form(action="/images/upload",class="dropzone")
+                .fallback
+                    input(name="file",type="file",multiple)
+
+        //.history
+        //    if data.length
+        //        h2 最近上传的图片
+        //        ul
+        //            each item in data
+        //                li
+        //                    a(href="#{item.url}", target="_blank")
+        //                        img(src="#{item.url}")
+
+    script(type="text/javascript" src="/vendors/dropzone/dropzone.js")
+    script(type="text/javascript" src="/vendors/zeroClipboard/ZeroClipboard.min.js")
+    script(type="text/javascript" src="/javascripts/images/images.js")
+    

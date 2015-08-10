@@ -1,0 +1,97 @@
+.imgbox{
+    background: rgba(255,255,255,0.9);
+}
+.imgbox h2{
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+.copy {
+    margin: 5px 5px 5px 10px;
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+	outline: none;
+}
+
+.copy.zeroclipboard-is-hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
+.copy.zeroclipboard-is-active {
+    background-color: #449d44;
+    border-color: #398439;
+}
+.copy.blue{
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    outline: none;
+}
+.imgbox form{
+}
+.imgbox .image-input{
+    margin-bottom: 20px;
+    display: block;
+}
+.imgbox .col-md-4{
+    padding: 30px;
+    background: #fff;
+    height: 100%;
+}
+.imgbox .col-md-8{
+    background: #000;
+    height: 100%;
+    padding: 30px;
+    opacity: .6;
+}
+.imgbox .col-md-8 h2{
+    text-align: center;
+    color: #fff;
+    font-weight: 400;
+}
+.imgbox .col-md-8 p{
+    color: #fff;
+}
+.history h2{
+    font-size: 18px;
+}
+
+.history li{
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    list-style: none;
+    position: relative;
+}
+.history li a{
+    display: block;
+    height: 150px;
+    text-align: center;
+    font-size: 14px;
+}
+.history li a img{
+    max-width: 100%;
+    max-height: 100%;
+}
