@@ -8,7 +8,10 @@ var index = require('../controllers/index'),
     members = require('../controllers/members');
 
 router.get('/', index.index);
+
 router.get('/tms', tms.index);
+router.post('/tms', tms.add);
+
 router.get('/images', images.index);
 router.get('/tools', tools.index);
 router.get('/members', members.index);

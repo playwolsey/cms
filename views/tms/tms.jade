@@ -5,7 +5,7 @@ block content
         .pages-list
             .row
                 .col-md-12
-                    a.add.btn.btn-primary.create_btn(href="javascript:void(0);") 创建活动页面
+                    a.add.btn.btn-primary.create_btn.J_create(href="javascript:void(0);") 创建活动页面
                     .wrapper
                         h2
                             活动页面列表
@@ -19,3 +19,56 @@ block content
                                     li.ti.order-time-reverse
                                         a(href="javascript:;") 按时间逆序
                         ul.main
+
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 创建活动页面
+                .modal-body
+                    form.form-horizontal(role='form',action='/tms',method='post',class="J_addTmsForm")
+                        .form-group
+                            label.col-sm-3.control-label 页面名称
+                            .col-sm-8
+                                input.form-control(type='text',name="name")
+                        .form-group
+                            label.col-sm-3.control-label 创建人
+                            .col-sm-8
+                                input.form-control(type='text',name="owner")
+                        .form-group
+                            label.col-sm-3.control-label 编辑密码
+                            .col-sm-8
+                                input.form-control(type='password',name="password")
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button', class='J_submit') 确定
+                            
+
+    form.pane.pane-create.invisible(action="/tms", method="post")
+        i.pageinfo-close x
+        div.pageinfo-box
+            input(type="hidden" name="owner" value="")
+            div.owner-select
+            div.title-wrapper
+                input.title-input(name="name" placeholder="标题")
+        div.gesturepwd-box
+            input#final-pwd(type="hidden" name="password" value="")
+            canvas.line-canvas(width="300", height="170")
+            div.pwd-points
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+                i.pwd-point
+        div.nextstep-wrapper
+            button.nextstep-btn(type="submit") 下一步
+                            
+
+    script(type="text/javascript" src="/javascripts/tms/tms.js")
