@@ -1,0 +1,27 @@
+.col-md-1{
+    margin-top: 40px;
+}
+.container .pic{
+    height: 65px;
+    border-radius: 999em;
+}
+.container .pic img{
+    width: 65px;
+    height: 65px;
+    border-radius: 999em;
+    border:3px solid #eee;
+}
+.container .desc{
+    padding: 10px;
+    color: #333;
+    text-align: center;
+    font-size: 12px;
+}
+.container .desc h3{
+    color: #fff;
+    font-size: 12px;
+    margin-top: 0px;
+}
+.container .desc p{
+    font-size: 12px;
+}
