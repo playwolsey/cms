@@ -1,0 +1,24 @@
+.qr-maker{
+    background: #fff;
+}
+.qr-maker .toolbox{
+    margin-bottom: 10px;
+    padding-bottom: 30px;
+    height: 240px;
+    border-bottom: 1px dotted #ccc;
+}
+.qr-maker .col-md-3{
+    padding-top: 20px;
+}
+.qr-maker h2{
+    color: #999;
+    font-size: 20px;
+    font-weight: 700;
+}
+.qr-maker textarea{
+    margin-bottom: 10px;
+}
+.qr-maker img{
+    width: 200px;
+    border: 5px solid #333;
+}
