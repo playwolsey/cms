@@ -1,0 +1,48 @@
+.navbar.navbar-default.navbar-static-top(role='navigation')
+    .container
+        .navbar-header
+            a.navbar-brand(href='#') 易信
+        .navbar-collapse.collapse
+            ul.nav.navbar-nav
+                if menu=='index'
+                    li.active
+                        a(href='/') 首页
+                else
+                    li
+                        a(href='/') 首页
+
+                if menu=='tms'
+                    li.active
+                        a(href='/tms') 页面工具
+                else
+                    li
+                        a(href='/tms') 页面工具
+
+                if menu=='mod'
+                    li.active
+                        a(href='/mod') 模块
+                else
+                    li
+                        a(href='/mod') 模块
+
+                if menu=='tu'
+                    li.active
+                        a(href="/tu") 图片空间
+                else
+                    li
+                        a(href="/tu") 图片空间
+
+                if menu=='tools'
+                    li.active
+                        a(href="/tools") 测试工具
+                else
+                    li
+                        a(href="/tools") 测试工具
+
+                if menu=='members'
+                    li.active
+                        a(href="/members") 开发人员
+                else
+                    li
+                        a(href="/members") 开发人员
+
