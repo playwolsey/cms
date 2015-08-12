@@ -60,10 +60,22 @@ function add(req, res) {
 }
 
 function edit(req, res) {
-    res.render('tms/tms_id', {title: '编辑' , menu: 'tms'});
+    res.render('tms/tms_id', {
+        title: '编辑',
+        menu: 'tms'
+    });
+}
+
+function preview(req, res) {
+    res.render('tms/preview', {
+        title: '预览',
+        menu: 'tms',
+        pid: req.params.id
+    });
 }
 
 
 exports.index = index;
 exports.add = add;
 exports.edit = edit;
+exports.preview = preview;
