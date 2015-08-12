@@ -11,6 +11,7 @@ router.get('/', index.index);
 
 router.get('/tms', tms.index);
 router.post('/tms', tms.add);
+router.get('/tms/:id', tms.edit);
 
 router.get('/images', images.index);
 router.get('/tools', tools.index);

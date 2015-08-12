@@ -8,41 +8,62 @@
 /*
  * module depends
  */
-var md5 = require('MD5');
+var fs = require('fs'),
+    md5 = require('MD5'),
+    path = require('path'),
+    http = require('http'),
+    domain = require('domain');
+
+var pool = require('../models/db');
+
 
 function index(req, res) {
-    res.render('tms/tms', {
-        title: '页面工具',
-        menu: 'tms'
+    var sql = 'select * from tms_page';
+
+    pool.getConnection(function(err, connection) {
+        connection.query(sql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            res.render('tms/tms', {
+                title: '页面工具',
+                menu: 'tms',
+                data: results
+            });
+
+            connection.release();
+        });
     });
 }
 
 function add(req, res) {
-    var tid = md5(Date.parse(new Date()));
-    res.redirect('/tms/' + tid);
+    var tid = md5(Date.parse(new Date())),
+        sql = 'INSERT INTO tms_page SET pid = ?, name = ?, owner = ?, password = ?',
+        params = [tid, req.param('name'), req.param('owner'), req.param('password')];
+
+    pool.getConnection(function(err, connection) {
+        connection.query(sql, params, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            connection.release();
+
+            res.redirect('/tms/' + tid);
+            //fs.open(path.normalize(__dirname+"/../plugins/templates/"+tid+".json"), 'a', function(err, fd) {
+            //    if(err) throw err;
+            //    res.redirect('/tms/' + tid);
+            //});
+        });
+    });
 }
 
-//function add(req, res){
-//    console.log(req.param('name'));
-//    pool.getConnection(function(err, connection) {
-//        var tid = md5(Date.parse(new Date()));
-//        connection.query(
-//            'INSERT INTO '+tablename+' '+
-//                'SET pid = ? , name = ?, owner = ?, password = ?',
-//            [tid, req.param("name"), req.param("owner"), req.param("password")],
-//
-//            function selectCb(err, resuluts, fields){
-//                connection.release();
-//
-//                fs.open(path.normalize(__dirname+"/../plugins/templates/"+tid+".json"),"a",function(e,fd){
-//                    if(e) throw e;
-//                    res.redirect('/tms/'+tid);
-//                });
-//
-//            });
-//    });
-//};
+function edit(req, res) {
+    res.render('tms/tms_id', {title: '编辑' , menu: 'tms'});
+}
 
 
 exports.index = index;
 exports.add = add;
+exports.edit = edit;

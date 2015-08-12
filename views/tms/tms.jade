@@ -19,6 +19,13 @@ block content
                                     li.ti.order-time-reverse
                                         a(href="javascript:;") 按时间逆序
                         ul.main
+                            each item in data
+                                li
+                                    div.avatar-wrapper
+                                        i.avatar(data-owner='#{item.owner}')
+                                        i.avatar-mask
+                                    a.util-ellipsis(href="/tms/preview/#{item.pid}") #{item.name}
+                                    span.util-ellipsis 作者：#{item.owner}
 
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
@@ -46,29 +53,4 @@ block content
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
                     button.btn.btn-primary(type='button', class='J_submit') 确定
                             
-
-    form.pane.pane-create.invisible(action="/tms", method="post")
-        i.pageinfo-close x
-        div.pageinfo-box
-            input(type="hidden" name="owner" value="")
-            div.owner-select
-            div.title-wrapper
-                input.title-input(name="name" placeholder="标题")
-        div.gesturepwd-box
-            input#final-pwd(type="hidden" name="password" value="")
-            canvas.line-canvas(width="300", height="170")
-            div.pwd-points
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-                i.pwd-point
-        div.nextstep-wrapper
-            button.nextstep-btn(type="submit") 下一步
-                            
-
     script(type="text/javascript" src="/javascripts/tms/tms.js")
