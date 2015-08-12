@@ -15,3 +15,40 @@ block content
                         a(href="/template/#{pid}", target="_blank") 查看页面
                     a(class="btn btn-success design" href="/tms/#{pid}") 重新设计页面
                     a(class="btn edit btn-danger J_editPage", data-pid="#{pid}", data-toggle="modal", data-target="#myModal") 编辑页面信息
+
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='false')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 编辑页面
+                .modal-body
+                    form.form-horizontal(role='form',method='post',class="J_editTmsForm", action="/tms/modify")
+                        .form-group
+                            label.col-sm-3.control-label 页面名称
+                            .col-sm-8
+                                input.form-control(type='text',name="name", class="J_pageName")
+                        .form-group
+                            label.col-sm-3.control-label 创建人
+                            .col-sm-8
+                                input.form-control(type='text',name="owner", class="J_pageOwner")
+                        .form-group
+                            label.col-sm-3.control-label 请输入旧密码
+                            .col-sm-8
+                                input.form-control(type='password',name="oldPassword", class="J_pageOldPwd")
+                        .form-group
+                            label.col-sm-3.control-label 请输入新密码
+                            .col-sm-8
+                                input.form-control(type='password',name="newPassword", class="J_pageNewPwd")
+                        .form-group
+                            label.col-sm-3.control-label 删除页面
+                            .col-sm-8
+                                input.form-control(type="text",name="command", class="J_pageCommand")
+                                span.help-block 如果想删除页面 请输入“DEL”
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button', class='J_editSubmit') 确定
+
+    script(type="text/javascript" src="/javascripts/tms/preview.js")
