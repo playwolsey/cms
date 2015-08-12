@@ -1,0 +1,44 @@
+extends ../inc/layout
+
+block content
+    .container
+        .pages-list
+            .row
+                .col-md-12
+                    a.add(class='btn btn-primary create_btn' href="#", data-toggle="modal", data-target="#myModal") 创建模块
+                    .wrapper
+                        h2
+                            模块列表
+                        ul
+                            //each item in data
+                            //    li
+                            //        a.util-ellipsis(href="/mod/#{item.mid}") #{item.name}
+                            //        span 作者：#{item.owner}
+
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 创建模块
+                .modal-body
+                    form.form-horizontal(role='form',action='/mod',method='post',class="J_addModForm")
+                        .form-group
+                            label.col-sm-3.control-label 模块名称
+                            .col-sm-8
+                                input.form-control(type='text',name="name")
+                        .form-group
+                            label.col-sm-3.control-label 创建人
+                            .col-sm-8
+                                input.form-control(type='text',name="owner")
+                        .form-group
+                            label.col-sm-3.control-label 编辑密码
+                            .col-sm-8
+                                input.form-control(type='password',name="password")
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button', class='J_submit') 确定
+
+    script(type="text/javascript" src="/javascripts/mods/mods.js")
