@@ -1,0 +1,36 @@
+extends ../inc/layout
+
+block content
+    div.container-fluid
+        .row
+            .col-md-3
+                .sidebar.modules
+                    .wrapper
+                        h2.sysmods-title 系统模块
+                        ul.sysmods
+                            //each widget in data.widgets
+                            //    li
+                            //        a(href="#",class="J_widgetDrag preview-#{widget.class}", widget-name="#{widget.class}") #{widget.desc}
+
+                        h2.extramods-title 自定义模块
+                        ul.extramods.content.mCustomScrollbar.light(data-mcs-theme="minimal-dark")
+                            //- mods = mods.reverse();
+                            //each widget in mods
+                            //    li
+                            //        a(href="#",class="J_widgetDrag preview-diy", widget-name="diy", widget-mid="#{widget.mid}" widget-conf="#{widget.conf}") #{widget.name}
+
+
+            .col-md-9
+                .main
+                    .mobile
+                        .screen#J_screen
+                            a.J_pageGlobalSetting.global-setting(class="J_globalSettingPanel",href="#",data-toggle="modal", data-target="#globalModal") 全局设置
+                    .mobile#instant-view
+                        .screen
+                            a.render.J_render(href="javascript:;") 渲染页面
+                            a.icon.qr-img(id="view-qr")
+                            a.icon.link(id="view-in-browser" href="/template/#{pid}", target="_blank")
+                            //iframe(src="/template/#{pid}")
+                        div.mask.hidden
+                            p 渲染中，请稍后...... 按ESC取消渲染
+                    .qr
