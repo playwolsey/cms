@@ -1,0 +1,49 @@
+doctype html
+
+html(lang='zh-cn')
+    head
+        meta(charset='utf-8')
+        meta(name='description', content='易信是时下最新的手机通讯软件,特有高清语音、离线短信、电话留言等通讯功能，更有海量免费贴图表情及音乐分享服务')
+        meta(name='keywords', content='易信官网、聊天、免费、微信、通讯、国际电话、手机、移动、易信、易聊、网易、电信、米聊、Line、连我、短信、电话')
+        meta(content='yes', name='apple-mobile-web-app-capable')
+        meta(content='telephone=no', name='format-detection')
+        meta(content='email=no', name='format-detection')
+        meta(content='black', name='apple-mobile-web-app-status-bar-style')
+        title #{title}
+        //link(rel='stylesheet', href='hui.css', media='all')
+        script(type='text/javascript', src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js")
+        
+        - var confjson;
+        - try {
+        -   confjson = JSON.parse(conf || '[]');
+        - } catch(e){
+        -   confjson = [];
+        - }
+        
+        - var diyHtml = html;
+        - var diyCss = css;
+        - var diyJs = '(function(){';
+        - 
+        - confjson.forEach(function(cf, i){
+        -     if(cf.default){
+        -         var diyReg = new RegExp('{{' + cf.key + '}}', 'gi');
+        -         diyCss = diyCss.replace(diyReg, cf.default);
+        -         diyHtml = diyHtml.replace(diyReg, cf.default);
+        -         diyJs += 'var ' + cf.key + ' = "' + cf.default + '";';
+        -     }
+        - });
+        - 
+        - diyJs += 'var $queue = $(".J_queue");';
+        - diyJs += js;
+        - diyJs += '})();'
+        
+        if diyCss
+            style(type="text/css")= diyCss
+
+    body
+        div.J_queue
+            if diyHtml
+                !{diyHtml}
+        //script(type='text/javascript', src='hui.js')
+        if js
+            script(type="text/javascript")!= diyJs

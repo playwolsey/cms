@@ -10,10 +10,10 @@ block content
                         h2
                             模块列表
                         ul
-                            //each item in data
-                            //    li
-                            //        a.util-ellipsis(href="/mod/#{item.mid}") #{item.name}
-                            //        span 作者：#{item.owner}
+                            each item in data
+                                li
+                                    a.util-ellipsis(href="/mods/#{item.mid}") #{item.name}
+                                    span 作者：#{item.owner}
 
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
@@ -24,7 +24,7 @@ block content
                         span.sr-only Close
                     h4#myModalLabel.modal-title 创建模块
                 .modal-body
-                    form.form-horizontal(role='form',action='/mod',method='post',class="J_addModForm")
+                    form.form-horizontal(role='form',action='/mods',method='post',class="J_addModForm")
                         .form-group
                             label.col-sm-3.control-label 模块名称
                             .col-sm-8

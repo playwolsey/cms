@@ -1,0 +1,44 @@
+extends ../inc/layout
+
+block append head
+    link(rel='stylesheet', href='/vendors/codemirror/codemirror.css')
+    link(rel='stylesheet', href='/vendors/codemirror/theme/ambiance.css')
+    style(type="text/css") .navbar{margin-bottom:0;}
+
+block content
+    input(type='hidden', value="#{mid}", id="J_mid")
+
+    .toolbar-panel
+        a.btn.btn-danger.btn-sm.J_saveAsBtn 另存一份
+        a.btn.btn-primary.btn-sm.J_saveBtn 确认保存
+
+    .mod-panel
+        .phone-panel
+            h3 预览
+            .phone-screen.J_screen
+                iframe(src="/mods/preview/#{mid}", id="J_previewFrame", name="previewFrame")
+
+        .edit-panel
+            h3 HTML
+            .html-panel
+                textarea#html-textarea #{html}
+
+            h3 CSS
+            .css-panel
+                textarea#css-textarea #{css}
+
+            h3 JavaScript
+            .js-panel
+                textarea#js-textarea #{js}
+
+            h3 Config
+            .conf-panel
+                textarea#conf-textarea #{conf}
+                
+    script(type="text/javascript", src="/vendors/codemirror/codemirror.js")
+    script(type="text/javascript", src="/vendors/codemirror/emmet.js")
+    script(type="text/javascript", src="/vendors/codemirror/mode/xml/xml.js")
+    script(type="text/javascript", src="/vendors/codemirror/mode/css/css.js")
+    script(type="text/javascript", src="/vendors/codemirror/mode/htmlmixed/htmlmixed.js")
+    script(type="text/javascript", src="/vendors/codemirror/mode/javascript/javascript.js")
+    script(type="text/javascript", src="/javascripts/mods/mods_id.js")

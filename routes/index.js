@@ -17,6 +17,10 @@ router.get('/tms/:id', tms.edit);
 router.get('/tms/preview/:id', tms.preview);
 
 router.get('/mods', mods.index);
+router.post('/mods', mods.add);
+router.get('/mods/:id', mods.edit);
+router.get('/mods/preview/:id', mods.preview);
+router.post('/mods/save', mods.save);
 
 router.get('/images', images.index);
 
