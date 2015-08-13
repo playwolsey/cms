@@ -17,7 +17,7 @@ var fs = require('fs'),
 var pool = require('../models/db');
 
 
-function index(req, res) {
+var index = function(req, res) {
     var sql = 'select * from tms_page';
 
     pool.getConnection(function(err, connection) {
@@ -37,7 +37,7 @@ function index(req, res) {
     });
 }
 
-function add(req, res) {
+var add = function(req, res) {
     var tid = md5(Date.parse(new Date())),
         sql = 'INSERT INTO tms_page SET pid = ?, name = ?, owner = ?, password = ?',
         params = [tid, req.param('name'), req.param('owner'), req.param('password')];
@@ -59,14 +59,14 @@ function add(req, res) {
     });
 }
 
-function edit(req, res) {
+var edit = function(req, res) {
     res.render('tms/tms_id', {
         title: '编辑',
         menu: 'tms'
     });
 }
 
-function preview(req, res) {
+var preview = function(req, res) {
     res.render('tms/preview', {
         title: '预览',
         menu: 'tms',

@@ -12,18 +12,12 @@
         },
 
         initNode: function() {
-            this.$createBtn = $('.J_create');
-            this.$myModal = $('#myModal');
             this.$submitBtn = $('.J_submit');
             this.$addTmsForm = $('.J_addTmsForm');
         },
 
         bindEvent: function() {
             var _this = this;
-
-			this.$createBtn.on('click', function() {
-				_this.$myModal.removeClass('fade').show();
-			});
 
             this.$submitBtn.on('click', function(e) {
                 e.preventDefault();
