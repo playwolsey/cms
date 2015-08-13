@@ -1,7 +1,7 @@
 extends ../inc/layout
 
 block content
-    div.container-fluid
+    .container-fluid
         .row
             .col-md-3
                 .sidebar.modules
@@ -31,6 +31,62 @@ block content
                             a.icon.qr-img(id="view-qr")
                             a.icon.link(id="view-in-browser" href="/template/#{pid}", target="_blank")
                             //iframe(src="/template/#{pid}")
-                        div.mask.hidden
+                        .mask.hidden
                             p 渲染中，请稍后...... 按ESC取消渲染
                     .qr
+
+
+    #J_modaldiy.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 编辑模块内容
+                .modal-body
+                    form.form-horizontal(role='form',class="J_modDataForm")
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button', class='J_submitMod') 确定
+
+    #globalModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 编辑模块内容
+                .modal-body
+                    form.form-horizontal(role='form',method='post',class="J_globalSettingForm")
+                        .form-group.global-group
+                            label.col-sm-3.control-label 页面背景色
+                            .col-sm-8
+                                textarea.form-control(rows="3",name="background")
+                                p(class="help-block") 请输入颜色值 如#ffffff
+                        .form-group.global-group
+                            label.col-sm-3.control-label 分享标题
+                            .col-sm-8
+                                textarea.form-control(rows="3",name="title")
+                                p(class="help-block") 分享出去的标题
+                        .form-group.global-group
+                            label.col-sm-3.control-label 分享描述
+                            .col-sm-8
+                                textarea.form-control(rows="3",name="desc")
+                                p(class="help-block") 分享出去的描述
+                        .form-group.global-group
+                            label.col-sm-3.control-label 分享图片地址
+                            .col-sm-8
+                                textarea.form-control(rows="3",name="image")
+                                p(class="help-block") 分享出去的图片地址
+                        .form-group.global-group
+                            label.col-sm-3.control-label 分享跳转地址
+                            .col-sm-8
+                                textarea.form-control(rows="3",name="url")
+                                p(class="help-block") 分享出去的跳转地址
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-primary(type='button', class='J_globalSettingSubmit') 确定
+
+    script(type="text/javascript" src="/javascripts/tms/tms_id.js")
