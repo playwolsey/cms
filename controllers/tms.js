@@ -60,15 +60,46 @@ var add = function(req, res) {
 }
 
 var edit = function(req, res) {
-    res.render('tms/tms_id', {
-        title: '编辑',
-        menu: 'tms'
+    var pageSql = 'select * from tms_page where pid ="' + req.params.id + '"',
+        modSql = 'select * from tms_mod';
+
+    pool.getConnection(function(err, connection) {
+        connection.query(pageSql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            connection.query(modSql, function(err, results, fields) {
+                if (err) {
+                    throw err;
+                }
+
+                fs.readFile(path.normalize(__dirname + "/../plugins/mods/mods.json"), "utf8", function(e, data) {
+                    if (e) {
+                        throw e;
+                    }
+                    if(data && JSON.parse(data)) {
+                        res.render('tms/tms_id', {
+                            title: '编辑 - 页面工具',
+                            menu: 'tms',
+                            mods: results,
+                            pid: req.params.id,
+                            data: JSON.parse(data)
+                        });
+                    }else{
+                        res.send('Sorry I have no data!');
+                    }
+                });
+
+                connection.release();
+            });
+        });
     });
 }
 
 var preview = function(req, res) {
     res.render('tms/preview', {
-        title: '预览',
+        title: '预览 - 页面工具',
         menu: 'tms',
         pid: req.params.id
     });
