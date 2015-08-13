@@ -28,7 +28,7 @@ block content
                     .mobile#instant-view
                         .screen
                             a.render.J_render(href="javascript:;") 渲染页面
-                            a.icon.qr-img(id="view-qr")
+                            a.icon.qr-img#view-qr
                             a.icon.link(id="view-in-browser" href="/template/#{pid}", target="_blank")
                             //iframe(src="/template/#{pid}")
                         .mask.hidden
@@ -88,5 +88,12 @@ block content
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
                     button.btn.btn-primary(type='button', class='J_globalSettingSubmit') 确定
+
+    #qr-popup.link-popup
+        span.link-popup-close ×
+        .link-popup-inner
+            .link-popup-content
+                div
+                    img#qr(src="http://qr.liantu.com/api.php?text=http://10.240.129.0:3000/template/#{pid}", alt="二维码")
 
     script(type="text/javascript" src="/javascripts/tms/tms_id.js")

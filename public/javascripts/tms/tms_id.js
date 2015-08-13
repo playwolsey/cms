@@ -9,8 +9,10 @@
         current_trigger,
         current_modal;
 
+    var Storage, QrView, TMS;
+
     // 本地存储对象封装
-    var Storage = {
+    Storage = {
         ls: win.localStorage,
         colorStoreNum: 5,
         sign: location.href.split('/tms/')[1].replace('#', ''),
@@ -70,10 +72,27 @@
 		}
     };
 
-    var tms = {
+    // 二维码对象
+	QrView = {
+		$el: $('#view-qr'),
+		$closeEl: $('.link-popup-close'),
+
+		render: function() {
+			this.$el.on('click', function() {
+				$('#qr-popup').show();
+			});
+			this.$closeEl.on('click', function(){
+				$(this).parents('.link-popup').hide();
+			});
+		}
+	};
+
+    TMS = {
         init: function() {
             this.initNode();
             this.bindEvent();
+
+            QrView.render();
         },
 
         initNode: function() {
@@ -101,5 +120,5 @@
         }
     };
 
-    tms.init();
+    TMS.init();
 })(jQuery, window);
