@@ -1,0 +1,150 @@
+{
+    "widgets": [{
+        "name": "banner",
+        "class": "banner",
+        "desc": "Banner模块",
+        "number": 1,
+        "style": [{
+            "key": "backgroundColor",
+            "name": "背景色",
+            "type": "text",
+            "note": "如#ffffff",
+            "default": "#ffffff"
+        }],
+        "bannerlayout": [{
+	        "key": "bannerlayout",
+	        "name": "排列方式",
+	        "note": "banner排列方式",
+	        "default": "horizon",
+	        "default_desc" : "横向排列",
+	        "select": {
+		        "horizon" : "横向排列",
+		        "vertical" : "竖向排列"
+            }
+        }],
+        "bannerpaddingtb": [{
+	        "key": "bannerpaddingtb",
+	        "name": "上下间距",
+	        "note": "banner上下间距",
+	        "default": "close",
+	        "default_desc" : "关闭",
+	        "select": {
+		        "open" : "开启",
+		        "close" : "关闭"
+            }
+        }],
+        "data": [{
+            "key": "image",
+            "name": "图片url",
+            "type": "text",
+            "note": "请填写图片地址 多个请用||分开 如url||url",
+            "default": "http://i.mmcdn.cn/simba/img/TB1eTk5FVXXXXa5XXXXSutbFXXX.jpg||http://i.mmcdn.cn/simba/img/TB1eTk5FVXXXXa5XXXXSutbFXXX.jpg"
+        },{
+            "key": "link",
+            "name": "跳转地址",
+            "type": "text",
+            "note": "请填写图片跳转地址，若无跳转地址填写javascript:; 多个请用||分开 link1||link1",
+            "default": "javascript:;||javascript:;"
+        }]
+    }, {
+        "name": "text",
+        "class": "text",
+        "desc": "文本模块",
+        "number": 0,
+        "style": [{
+            "key": "backgroundColor",
+            "name": "背景色",
+            "type": "text",
+            "note": "如#ffffff",
+            "default": "#ffffff"
+        }],
+        "pdlr": [{
+	    	"key": "pdlr",
+	        "name": "左右边距",
+	        "type": "input",
+	        "note": "左右边距，单位为rem",
+	        "default": "0.5"
+	    }],
+	    "pdtb": [{
+	    	"key": "pdtb",
+	        "name": "上下边距",
+	        "type": "input",
+	        "note": "上下边距，单位为rem",
+	        "default": "0.5"
+	    }],
+	    "lineheight": [{
+		    "key": "lineheight",
+		    "name": "行高",
+		    "type": "input",
+		    "default": "0.9",
+		    "note": "行高，单位为rem"
+		}],
+		"letterspace": [{
+			"key": "letterspace",
+		    "name": "字间距",
+		    "type": "input",
+		    "default": "0",
+		    "note": "字间距，单位为rem"
+		}],
+        "content": [{
+	        "key": "textContent",
+	        "name": "文本内容",
+	        "type": "textarea",
+	        "note": "输入文本",
+	        "default": "一些文字"
+	    }],
+	    "data": []
+    }, {
+	    "name": "nav",
+        "class": "nav",
+        "desc": "导航模块",
+        "number": 0,
+        "style": [{
+            "key": "backgroundColor",
+            "name": "背景色",
+            "type": "text",
+            "note": "如#ffffff",
+            "default": "#ffffff"
+        }],
+        "navtpl" : [{
+	        "key": "navtpl",
+	        "name": "导航模板",
+	        "note": "",
+	        "default": "black_red",
+	        "default_desc" : "黑底红字",
+	        "select": {
+		        "black_red" : "黑底红字",
+		        "black_white" : "黑底白字",
+		        "black_yellow" : "黑底黄字",
+		        "green_white": "绿底白字"
+            }
+	    }],
+	    "insertpos" : [{
+		    "key": "insertpos",
+	        "name": "插入位置",
+	        "type": "text",
+	        "note": "在指定模块之前插入，这里输入对应模块的序号",
+	        "default": ""
+	    }],
+	    "paddinglr" : [{
+		    "key": "paddinglr",
+	        "name": "两边边距",
+	        "type": "text",
+	        "note": "设置两边的边距，单位为rem",
+	        "default": "0"
+		}],
+	    "data": [{
+            "key": "navtext",
+            "name": "锚点文字",
+            "type": "textarea",
+            "note": "用||分隔",
+            "default": "锚点1||锚点2||锚点3"
+        }, {
+            "key": "navhole",
+            "name": "目标位置",
+            "type": "textarea",
+            "note": "用||分隔，填写的数字通常为即将跳转到的banner模块对应的序号",
+    	    "default": "1||2||3"
+	    }]
+	}]
+}

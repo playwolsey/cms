@@ -1,0 +1,25 @@
+{
+    "name": "bannner",
+    "class": "banner",
+    "number": 1,
+    "style": [{
+        "key": "background-color",
+        "name": "背景色",
+        "type": "text",
+        "note": "注释",
+        "default": "#ffffff"
+    }],
+    "data": [{
+        "key": "image",
+        "name": "图片url",
+        "type": "text",
+        "note": "注释",
+        "default": "http://b1.hucdn.com//upload/prom/1408/11/51950071140316_640x240.jpg"
+    },{
+        "key": "link",
+        "name": "跳转地址",
+        "type": "text",
+        "note": "注释",
+        "default": "http://yixin.im"
+    }]
+}
