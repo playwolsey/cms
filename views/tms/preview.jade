@@ -3,8 +3,8 @@ extends ../inc/layout
 block content
     .container-fluid.preview
         .row
-            .col-md-3
-            .col-md-9
+            .col-md-1
+            .col-md-6
                 .main
                     .mobile
                         .screen#J_screen
@@ -15,6 +15,7 @@ block content
                         a(href="/template/#{pid}", target="_blank") 查看页面
                     a(class="btn btn-success design" href="/tms/#{pid}") 重新设计页面
                     a(class="btn edit btn-danger J_editPage", data-pid="#{pid}", data-toggle="modal", data-target="#myModal") 编辑页面信息
+            .col-md-5
 
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='false')
         .modal-dialog
