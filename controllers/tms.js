@@ -16,6 +16,12 @@ var fs = require('fs'),
 
 var pool = require('../models/db');
 
+process.on('uncaughtException', function(err) {
+    console.error('Error caught in uncaughtException event:', err);
+});
+
+var d = domain.create();
+
 
 var index = function(req, res) {
     var sql = 'select * from tms_page';
@@ -104,10 +110,42 @@ var preview = function(req, res) {
         menu: 'tms',
         pid: req.params.id
     });
-}
+};
+
+var template = function(req, res) {
+    var sql = 'select * from tms_page where pid ="' + req.params.id + '"';
+
+    pool.getConnection(function(err, connection) {
+        connection.query(sql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            d.on('error', function(err) {
+                console.error('Error caught by domain:', err);
+                connection.release();
+            });
+
+            d.run(function() {
+                process.nextTick(function() {
+                    fs.readFile(path.normalize(__dirname+"/../plugins/templates/"+req.params.id+".json"), "utf8", function(e,data) {
+                        if (data && JSON.parse(data)) {
+                            res.render('tms/template', {title:results.length>=1?results[0].name:results.name, data:JSON.parse(data)});
+                        } else {
+                            res.send('Sorry, I have no data!');
+                        }
+                    });
+                });
+            });
+        });
+    });
+};
+
+
 
 
 exports.index = index;
 exports.add = add;
 exports.edit = edit;
 exports.preview = preview;
+exports.template = template;
