@@ -80,7 +80,6 @@ var edit = function(req, res) {
                 }
 
                 fs.readFile(path.normalize(__dirname + "/../plugins/mods/mods.json"), "utf8", function(e, data) {
-                    console.log('xxxxxxx', data.widgets);
                     if (e) {
                         throw e;
                     }
