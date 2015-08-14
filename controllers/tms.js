@@ -56,8 +56,10 @@ var add = function(req, res) {
 
             connection.release();
 
-            fs.open(path.normalize(__dirname+"/../plugins/templates/"+tid+".json"), 'a', function(err, fd) {
-                if(err) throw err;
+            fs.open(path.normalize(__dirname + "/../plugins/templates/" + tid + ".json"), 'a', function(err, fd) {
+                if (err) {
+                    throw err;
+                }
                 res.redirect('/tms/' + tid);
             });
         });
