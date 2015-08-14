@@ -11,7 +11,7 @@ block content
                             iframe(src="/template/#{pid}")
                     .qr
                         h3 扫码实时预览
-                        img(src="http://qr.liantu.com/api.php?text=http://fed.beibei.com/template/#{pid}")
+                        img(src="http://qr.liantu.com/api.php?text=http://10.240.129.0:3000/template/#{pid}")
                         a(href="/template/#{pid}", target="_blank") 查看页面
                     a(class="btn btn-success design" href="/tms/#{pid}") 重新设计页面
                     a(class="btn edit btn-danger J_editPage", data-pid="#{pid}", data-toggle="modal", data-target="#myModal") 编辑页面信息

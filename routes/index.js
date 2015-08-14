@@ -15,6 +15,7 @@ router.get('/tms', tms.index);
 router.post('/tms', tms.add);
 router.get('/tms/:id', tms.edit);
 router.get('/tms/preview/:id', tms.preview);
+router.get('/template/:id', tms.template);
 
 router.get('/mods', mods.index);
 router.post('/mods', mods.add);
