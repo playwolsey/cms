@@ -56,11 +56,10 @@ var add = function(req, res) {
 
             connection.release();
 
-            res.redirect('/tms/' + tid);
-            //fs.open(path.normalize(__dirname+"/../plugins/templates/"+tid+".json"), 'a', function(err, fd) {
-            //    if(err) throw err;
-            //    res.redirect('/tms/' + tid);
-            //});
+            fs.open(path.normalize(__dirname+"/../plugins/templates/"+tid+".json"), 'a', function(err, fd) {
+                if(err) throw err;
+                res.redirect('/tms/' + tid);
+            });
         });
     });
 }
