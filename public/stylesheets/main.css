@@ -292,14 +292,14 @@ body{background:url(/images/bg.jpg) #00B48A 0 0 no-repeat;background-attachment:
 .render:hover {
 	color: #FFF;
 }
-.edit{
+.edit {
     position: absolute;
     right: 30px;
     top: 320px;
     width: 150px;
     z-index: 1;
 }
-.del{
+.delete {
     position: absolute;
     right: 30px;
     top: 370px;
