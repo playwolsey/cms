@@ -24,17 +24,254 @@ block content
                 .main
                     .mobile
                         .screen#J_screen
-                            a.J_pageGlobalSetting.global-setting(class="J_globalSettingPanel",href="#",data-toggle="modal", data-target="#globalModal") 全局设置
+                            a.J_pageGlobalSetting.global-setting(class="J_globalSettingPanel",href="#", data-toggle="modal", data-target="#globalModal") 全局设置
                     .mobile#instant-view
                         .screen
                             a.render.J_render(href="javascript:;") 渲染页面
                             a.icon.qr-img#view-qr
                             a.icon.link(id="view-in-browser" href="/template/#{pid}", target="_blank")
-                            //iframe(src="/template/#{pid}")
+                            iframe(src="/template/#{pid}")
                         .mask.hidden
                             p 渲染中，请稍后...... 按ESC取消渲染
                     .qr
 
+    each widget in data.widgets
+        .modal(id="J_modal#{widget.name}", tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+            if widget.name === 'banner'
+                div.bannerlink-popup.hidden
+                    input(type="text", value="")
+                    span.bannerlink-confirm 确定
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        button.close(type='button', data-dismiss='modal')
+                            span(aria-hidden='true') ×
+                            span.sr-only Close
+                        h4#myModalLabel.modal-title 编辑模块内容
+                    .modal-body
+                        form.form-horizontal(role='form',action='/mod',method='post',class="J_modDataForm")
+                            each item in widget.style
+                                .form-group.style-group
+                                    label.col-sm-3.control-label #{item.name}
+                                    .col-sm-8
+                                        textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                        p(class="help-block") #{item.note}
+                            if widget.name == 'banner'
+                                each item in widget.bannerlayout
+                                    .form-group.bannerlayout-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuBannerLayout", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuBannerLayout")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                                each item in widget.bannerpaddingtb
+                                    .form-group.bannerpaddingtb-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuBannerPaddingTB", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuBannerPaddingTB")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                            else if widget.name == 'itemlist'
+                                each item in widget.tpl
+                                    .form-group.tpl-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuTpl", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuTpl")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                                each item in widget.type
+                                    .form-group.type-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuType", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuType")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                                            
+                                each item in widget.ids
+                                    .form-group.id-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            input.btn.btn-primary.help-block.format-btn(type="button" value="格式化")
+                                each item in widget.badge
+                                    .form-group.badge-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.firstimg
+                                    .form-group.firstimg-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="firstimg_img" placeholder="图片链接" style="margin-bottom: 10px;")
+                                            input.form-control(name="firstimg_link" placeholder="跳转链接")
+                                each item in widget.lastimg
+                                    .form-group.lastimg-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="lastimg_img" placeholder="图片链接" style="margin-bottom: 10px;")
+                                            input.form-control(name="lastimg_link" placeholder="跳转链接")
+                                each item in widget.imgs
+                                    .form-group.imgs-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            p(class="help-block") #{item.note}
+                                each item in widget.description
+                                    .form-group.desc-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            p(class="help-block") #{item.note}
+                                each item in widget.category
+                                    .form-group.category-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            div.tags-cate
+                                                each item in widget.tags
+                                                    span.tag-cate(data-key="#{item.key}") #{item.desc}
+                                            p(class="help-block") #{item.note}
+                                each item in widget.bmkttitle
+                                    .form-group.bmkttitle-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            p(class="help-block") #{item.note}
+                                each item in widget.bmktdesc
+                                    .form-group.bmktdesc-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            p(class="help-block") #{item.note}
+                                each item in widget.bmktlink
+                                    .form-group.bmktlink-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                            p(class="help-block") #{item.note}
+                                
+                                
+                            else if widget.name === 'text'
+                                each item in widget.pdtb
+                                    .form-group.pdtb-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.pdlr
+                                    .form-group.pdlr-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.lineheight
+                                    .form-group.lineheight-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.letterspace
+                                    .form-group.letterspace-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.content
+                                    .form-group.text-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            textarea.form-control(rows="3",name="#{item.key}")
+                            else if widget.name === 'nav'
+                                each item in widget.navtpl
+                                    .form-group.navtpl-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuNavTpl", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuNavTpl")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                                each item in widget.insertpos
+                                    .form-group.insertpos-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.paddinglr
+                                    .form-group.paddinglr-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                            else if widget.name === 'recommand'
+                                each item in widget.recommandtpl
+                                    .form-group.recommandtpl-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input(type="hidden" value="#{item.default}")
+                                            div.dropdown
+                                                button.btn.btn-default.dropdown-toggle(type="button", id="dropdownMenuRecommandTpl", data-toggle="dropdown") #{item.default_desc}&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenuRecommandTpl")
+                                                    each val,key in item.select
+                                                        li(data-value="#{key}")
+                                                            a(role="menuitem", tabindex="-1", href="javascript:;") #{val}
+                                each item in widget.topcolor
+                                    .form-group.topcolor-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.recommandcolor
+                                    .form-group.recommandcolor-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                                each item in widget.toptext
+                                    .form-group.toptext-group
+                                        label.col-sm-3.control-label #{item.name}
+                                        .col-sm-8
+                                            input.form-control(name="#{item.key}" style="margin-bottom: 10px;" value="#{item.default}")
+                                            p(class="help-block") #{item.note}
+                            each item in widget.data
+                                .form-group.data-group
+                                    label.col-sm-3.control-label #{item.name}
+                                    .col-sm-8
+                                        textarea.form-control(rows="3",name="#{item.key}") #{item.default}
+                                        if (widget.name === 'recommand') && item.key === 'recommandlink'
+                                            div.tags-cate
+                                                each item in widget.tags
+                                                    span.tag-cate(data-key="#{item.key}") #{item.desc}
+                                        p(class="help-block") #{item.note}
+
+                    .modal-footer
+                        button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                        button.btn.btn-primary(type='button', class='J_submitMod') 确定
 
     #J_modaldiy.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog

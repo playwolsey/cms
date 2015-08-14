@@ -75,10 +75,11 @@ var edit = function(req, res) {
                 }
 
                 fs.readFile(path.normalize(__dirname + "/../plugins/mods/mods.json"), "utf8", function(e, data) {
+                    console.log('xxxxxxx', data.widgets);
                     if (e) {
                         throw e;
                     }
-                    if(data && JSON.parse(data)) {
+                    if (data && JSON.parse(data)) {
                         res.render('tms/tms_id', {
                             title: '编辑 - 页面工具',
                             menu: 'tms',
@@ -86,7 +87,7 @@ var edit = function(req, res) {
                             pid: req.params.id,
                             data: JSON.parse(data)
                         });
-                    }else{
+                    } else {
                         res.send('Sorry I have no data!');
                     }
                 });
