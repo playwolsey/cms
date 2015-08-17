@@ -102,7 +102,7 @@ var edit = function(req, res) {
             });
         });
     });
-}
+};
 
 var preview = function(req, res) {
     res.render('tms/preview', {
