@@ -12,9 +12,26 @@
         },
 
         initNode: function() {
+            this.$editPageBtn = $('.J_editPage');
+            this.$nameInput = $('.J_pageName');
+            this.$ownerInput = $('.J_pageOwner');
         },
 
         bindEvent: function() {
+            var _this = this;
+
+            this.$editPageBtn.on('click', function(e) {
+                e.preventDefault();
+
+                pid = $(e.target).attr('data-pid');
+
+                $.post('/tms/change', {
+                    "pid": pid
+                }, function(resp) {
+                    _this.$nameInput.val(resp.data.name);
+                    _this.$ownerInput.val(resp.data.owner);
+                });
+            });
         }
     };
 

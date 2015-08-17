@@ -141,6 +141,21 @@ var template = function(req, res) {
     });
 };
 
+var change = function(req, res) {
+    var sql = 'select * from tms_page where pid ="' + req.param('pid') + '"';
+
+    pool.getConnection(function(err, connection) {
+        connection.query(sql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            res.json({status: 1 , msg: '更改', data: results[0]});
+
+            connection.release();
+        });
+    });
+};
 
 
 
@@ -149,3 +164,4 @@ exports.add = add;
 exports.edit = edit;
 exports.preview = preview;
 exports.template = template;
+exports.change = change;
