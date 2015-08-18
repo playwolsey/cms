@@ -91,32 +91,41 @@
         init: function() {
             this.initNode();
             this.bindEvent();
-
-            QrView.render();
+            this.render();
         },
 
         initNode: function() {
             this.$globalSettingSubmitBtn = $('.J_globalSettingSubmit');
         },
 
+        render: function() {
+            QrView.render();
+        },
+
         bindEvent: function() {
+            var _this = this;
+
             this.$globalSettingSubmitBtn.on('click', function(e) {
-                e.preventDefault();
-
-                var data_groups = $(e.target).parents('.modal').find('textarea'),
-                    global = {};
-
-                $.each(data_groups, function(i, t) {
-                    if ($(t).val()) {
-                        global[$(t).attr('name')] = $(t).val();
-                    }
-                });
-
-                $('.J_globalSettingPanel').attr('data-global', JSON.stringify(global));
-                Storage.saveGlobal();
-                
-                $('#globalModal').modal('hide');
+                _this.storeGlobal();
             });
+        },
+
+        storeGlobal: function(e) {
+            e.preventDefault();
+
+            var data_groups = $(e.target).parents('.modal').find('textarea'),
+                global = {};
+
+            $.each(data_groups, function(i, t) {
+                if ($(t).val()) {
+                    global[$(t).attr('name')] = $(t).val();
+                }
+            });
+
+            $('.J_globalSettingPanel').attr('data-global', JSON.stringify(global));
+            Storage.saveGlobal();
+            
+            $('#globalModal').modal('hide');
         }
     };
 

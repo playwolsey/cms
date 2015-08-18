@@ -225,6 +225,12 @@ var del = function(req, res) {
     });
 };
 
+
+var renderPage = function(req, res) {
+};
+
+
+
 exports.index = index;
 exports.add = add;
 exports.edit = edit;
@@ -233,3 +239,4 @@ exports.template = template;
 exports.change = change;
 exports.modify = modify;
 exports.del = del;
+exports.renderPage = renderPage;
