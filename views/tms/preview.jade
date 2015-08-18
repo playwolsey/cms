@@ -1,5 +1,8 @@
 extends ../inc/layout
 
+block append head
+    link(rel="stylesheet",href="/stylesheets/tms/preview.css")
+
 block content
     .container-fluid.preview
         .row
@@ -15,7 +18,7 @@ block content
                         a(href="/template/#{pid}", target="_blank") 查看页面
                     a(class="btn design btn-success" href="/tms/#{pid}") 重新设计页面
                     a(class="btn edit btn-primary J_editPage", data-pid="#{pid}", data-toggle="modal", data-target="#myModal") 编辑页面信息
-                    a(class="btn delete btn-danger J_deletePage" href="javascript:void(0);") 删除页面
+                    a(class="btn delete btn-danger J_deletePage", data-pid="#{pid}", data-toggle="modal", data-target="#delModal" href="javascript:void(0);") 删除页面
             .col-md-5
 
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='false')
@@ -43,5 +46,23 @@ block content
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
                     button.btn.btn-primary(type='button', class='J_editSubmit') 确定
+
+    #delModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='delModalLabel', aria-hidden='false')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 确定删除本页面吗？
+                .modal-body
+                    form.form-horizontal(role='form',method='post',class="J_delPageForm", action="/tms/del")
+                        .form-group
+                            label.col-sm-3.control-label 请输入密码
+                            .col-sm-8
+                                input.form-control(type='password',name="password", class="J_pagePwd")
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+                    button.btn.btn-danger(type='button', class='J_delSubmit') 确定
 
     script(type="text/javascript" src="/javascripts/tms/preview.js")

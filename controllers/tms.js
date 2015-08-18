@@ -157,7 +157,73 @@ var change = function(req, res) {
     });
 };
 
+var modify = function(req, res) {
+    var findSql = 'select * from tms_page where pid ="' + req.param('pid') + '"',
+        upSql = 'update tms_page set name="' + req.param('name') + '",owner="' + req.param('owner') + '" where pid="' + req.param('pid') + '"';
 
+    pool.getConnection(function(err, connection) {
+        connection.query(findSql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            if (results[0].password !== req.param('password')) {
+                res.json({
+                    status: 0,
+                    msg:'密码错误'
+                });
+            } else {
+                connection.query(upSql, function(err, results, fields) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    res.json({
+                        status: 1,
+                        msg: "更改成功"
+                    });
+
+                    connection.release();
+                });
+            }
+        });
+    });
+};
+
+
+var del = function(req, res) {
+    var findSql = 'select * from tms_page where pid ="' + req.param('pid') + '"',
+        delSql = 'delete from tms_page where pid ="' + req.param("pid") + '"';
+
+    pool.getConnection(function(err, connection) {
+        connection.query(findSql, function(err, results, fields) {
+            if (err) {
+                throw err;
+            }
+
+            if (results[0].password !== req.param('password')) {
+                res.json({
+                    status: 0,
+                    msg:'密码错误'
+                });
+            } else {
+                connection.query(delSql, function(err, results, fields) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    res.json({
+                        status: 1,
+                        msg: "删除成功"
+                    });
+
+                    connection.release();
+                });
+            }
+        });
+
+    });
+};
 
 exports.index = index;
 exports.add = add;
@@ -165,3 +231,5 @@ exports.edit = edit;
 exports.preview = preview;
 exports.template = template;
 exports.change = change;
+exports.modify = modify;
+exports.del = del;

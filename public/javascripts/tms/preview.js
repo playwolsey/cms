@@ -6,6 +6,8 @@
 
 ;(function($, win, undef) {
     var preview = {
+        pid: '',
+
         init: function() {
             this.initNode();
             this.bindEvent();
@@ -13,24 +15,57 @@
 
         initNode: function() {
             this.$editPageBtn = $('.J_editPage');
+            this.$editSubmitBtn = $('.J_editSubmit');
+            this.$delSubmitBtn = $('.J_delSubmit');
+
             this.$nameInput = $('.J_pageName');
             this.$ownerInput = $('.J_pageOwner');
+            this.$passwordInput = $('.J_pagePwd');
         },
 
         bindEvent: function() {
             var _this = this;
 
             this.$editPageBtn.on('click', function(e) {
-                e.preventDefault();
+                _this.getInfo(e);
+            });
 
-                pid = $(e.target).attr('data-pid');
+            this.$editSubmitBtn.on('click', function(e) {
+                _this.upPageInfo(e)
+            });
+        },
 
-                $.post('/tms/change', {
-                    "pid": pid
-                }, function(resp) {
-                    _this.$nameInput.val(resp.data.name);
-                    _this.$ownerInput.val(resp.data.owner);
-                });
+        getInfo: function(e) {
+            e.preventDefault();
+
+            var _this = this;
+            this.pid = $(e.target).attr('data-pid');
+
+            $.post('/tms/change', {
+                "pid": _this.pid
+            }, function(resp) {
+                _this.$nameInput.val(resp.data.name);
+                _this.$ownerInput.val(resp.data.owner);
+            });
+        },
+
+        upPageInfo: function(e) {
+            e.preventDefault();
+
+            var _this = this;
+
+            $.post('/tms/modify', {
+                "pid": _this.pid,
+                "name": _this.$nameInput.val(),
+                "owner": _this.$ownerInput.val(),
+                "password": _this.$passwordInput.val()
+            }, function(resp) {
+                if (resp.status == 0) {
+                    alert('密码错误');
+                } else {
+                    alert(resp.msg);
+                    window.location = '/tms';
+                }
             });
         }
     };
