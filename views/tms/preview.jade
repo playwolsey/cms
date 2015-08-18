@@ -18,7 +18,7 @@ block content
                         a(href="/template/#{pid}", target="_blank") 查看页面
                     a(class="btn design btn-success" href="/tms/#{pid}") 重新设计页面
                     a(class="btn edit btn-primary J_editPage", data-pid="#{pid}", data-toggle="modal", data-target="#myModal") 编辑页面信息
-                    a(class="btn delete btn-danger J_deletePage", data-pid="#{pid}", data-toggle="modal", data-target="#delModal" href="javascript:void(0);") 删除页面
+                    a(class="btn delete btn-danger J_deletePage", data-pid="#{pid}", data-toggle="modal", data-target="#delModal") 删除页面
             .col-md-5
 
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='false')
@@ -60,9 +60,9 @@ block content
                         .form-group
                             label.col-sm-3.control-label 请输入密码
                             .col-sm-8
-                                input.form-control(type='password',name="password", class="J_pagePwd")
+                                input.form-control(type='password',name="password", class="J_delPagePwd")
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
-                    button.btn.btn-danger(type='button', class='J_delSubmit') 确定
+                    button.btn.btn-danger(type='button', data-pid="#{pid}", class='J_delSubmit') 确定
 
     script(type="text/javascript" src="/javascripts/tms/preview.js")

@@ -21,6 +21,7 @@
             this.$nameInput = $('.J_pageName');
             this.$ownerInput = $('.J_pageOwner');
             this.$passwordInput = $('.J_pagePwd');
+            this.$delPasswordInput = $('.J_delPagePwd');
         },
 
         bindEvent: function() {
@@ -31,7 +32,11 @@
             });
 
             this.$editSubmitBtn.on('click', function(e) {
-                _this.upPageInfo(e)
+                _this.upPageInfo(e);
+            });
+
+            this.$delSubmitBtn.on('click', function(e) {
+                _this.delPageInfo(e);
             });
         },
 
@@ -59,6 +64,24 @@
                 "name": _this.$nameInput.val(),
                 "owner": _this.$ownerInput.val(),
                 "password": _this.$passwordInput.val()
+            }, function(resp) {
+                if (resp.status == 0) {
+                    alert('密码错误');
+                } else {
+                    alert(resp.msg);
+                    window.location = '/tms';
+                }
+            });
+        },
+
+        delPageInfo: function(e) {
+            e.preventDefault();
+
+            var _this = this;
+
+            $.post('/tms/del', {
+                "pid": $(e.target).attr('data-pid'),
+                "password": _this.$delPasswordInput.val()
             }, function(resp) {
                 if (resp.status == 0) {
                     alert('密码错误');
