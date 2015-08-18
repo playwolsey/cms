@@ -9,7 +9,7 @@
         current_trigger,
         current_modal;
 
-    var Storage, QrView, TMS;
+    var Storage, QrView, TMS, DnD;
 
     // 本地存储对象封装
     Storage = {
@@ -87,6 +87,79 @@
 		}
 	};
 
+    // 拖拽对象
+    DnD = {
+        bind: function() {
+            $(".J_widgetDrag").draggable({
+                helper: "clone"
+            });
+
+            $("#J_screen").droppable({
+                drop: function(event, ui) {
+                    var widget_name = $(ui.draggable).attr('widget-name'),
+                        $widget;
+
+                    if(!$(ui.draggable).hasClass('J_widgetDrag')){
+                        return;
+                    }
+
+                    if (widget_name == 'banner') {
+                        $widget = $('<div class="J_widget widget-box" widget-name="' + widget_name + '">' +
+                                        '<div class="wrapper">' +
+                                            '<div class="banner">' +
+                                                '<a href="http://yixin.im"><img src="http://b0.hucdn.com/party/default/f2a8c505f91aba660bac5732395c947e.jpg"/></a>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<a class="up">上</a>' +
+                                        '<a class="down">下</a>' +
+                                        '<a class="J_edit edit" trigger-widget="' + widget_name + '">改</a>' +
+                                        '<a class="J_del del">删</a>' +
+                                        '<a class="anchor-edit"></a>' +
+                                    '</div>');
+                    } else if(widget_name == 'text') {
+                        $widget = $('<div class="J_widget widget-box" widget-name="' + widget_name + '">' +
+                                        '<div class="wrapper">' +
+                                            '<div class="text">' +
+                                                '<a><img src="http://b0.hucdn.com/party/default/8ddd21cb4781ec57aa1fe9a7a91b3888.jpg"/></a>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<a class="up">上</a>' +
+                                        '<a class="down">下</a>' +
+                                        '<a class="J_edit edit" trigger-widget="' + widget_name + '">改</a>' +
+                                        '<a class="J_del del">删</a>' +
+                                        '<a class="anchor-edit"></a>' +
+                                    '</div>');
+                    } else if(widget_name == 'nav') {
+                        $widget = $('<div class="J_widget widget-box" widget-name="' + widget_name + '">' + '<div class="wrapper"><div class="nav"><a><img src="http://b0.hucdn.com/party/default/0fc4e35c36f8414fdc78f272362c2684.png"/></a></div></div><a class="up">上</a><a class="down">下</a>' + '<a class="J_edit edit" trigger-widget="' + widget_name + '">改</a><a class="J_del del">删</a><a class="anchor-edit"></a></div>');
+                    } else if(widget_name == 'diy') {
+                        var mid = $(ui.draggable).attr('widget-mid');
+
+                        $widget = $('<div class="J_widget widget-box" widget-name="diy" widget-mid="'+mid+'"><img src="http://b0.hucdn.com/party/default/37b66d74cea626bbc15ca6e671ca0f99.jpg"><a class="up">上</a><a class="down">下</a><a class="J_edit edit" trigger-widget="' + widget_name + '">改</a><a class="J_del del">删</a><a class="anchor-edit"></a></div>');
+                    }
+                    
+                    if($widget instanceof jQuery){
+                        $widget.droppable({
+                            drop : function(event, ui){
+                                if($(ui.draggable).hasClass('mod-timer') && ($(this).has('.timer-edit').length === 0)){
+                                    event.stopPropagation();
+                                    $(this).append('<i class="icon clock timer-edit"></i>');
+                                }
+                            }
+                        });
+
+                        $(this).append($widget);
+                        Storage.save();
+                    }
+                }
+            });
+            
+        },
+
+        render: function() {
+            this.bind();
+        }
+    };
+
     TMS = {
         init: function() {
             this.initNode();
@@ -100,6 +173,7 @@
 
         render: function() {
             QrView.render();
+            DnD.render();
         },
 
         bindEvent: function() {
