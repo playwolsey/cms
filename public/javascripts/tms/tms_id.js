@@ -32,11 +32,11 @@
         save: function() {
             var cached = [],
                 $widgets = $('.J_widget'),
-				widgetLen = widgets.length,
+				widgetLen = $widgets.length,
 				i, j, attrs, attrLen;
 
             for (; i < widgetLen; i++) {
-				attrs = widgets[i].attributes,
+				attrs = $widgets[i].attributes,
 				attrLen = attrs.length;
 				cached[i] = {};
 
