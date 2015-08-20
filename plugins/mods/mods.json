@@ -94,57 +94,5 @@
 	        "default": "一些文字"
 	    }],
 	    "data": []
-    }, {
-	    "name": "nav",
-        "class": "nav",
-        "desc": "导航模块",
-        "number": 0,
-        "style": [{
-            "key": "backgroundColor",
-            "name": "背景色",
-            "type": "text",
-            "note": "如#ffffff",
-            "default": "#ffffff"
-        }],
-        "navtpl" : [{
-	        "key": "navtpl",
-	        "name": "导航模板",
-	        "note": "",
-	        "default": "black_red",
-	        "default_desc" : "黑底红字",
-	        "select": {
-		        "black_red" : "黑底红字",
-		        "black_white" : "黑底白字",
-		        "black_yellow" : "黑底黄字",
-		        "green_white": "绿底白字"
-            }
-	    }],
-	    "insertpos" : [{
-		    "key": "insertpos",
-	        "name": "插入位置",
-	        "type": "text",
-	        "note": "在指定模块之前插入，这里输入对应模块的序号",
-	        "default": ""
-	    }],
-	    "paddinglr" : [{
-		    "key": "paddinglr",
-	        "name": "两边边距",
-	        "type": "text",
-	        "note": "设置两边的边距，单位为rem",
-	        "default": "0"
-		}],
-	    "data": [{
-            "key": "navtext",
-            "name": "锚点文字",
-            "type": "textarea",
-            "note": "用||分隔",
-            "default": "锚点1||锚点2||锚点3"
-        }, {
-            "key": "navhole",
-            "name": "目标位置",
-            "type": "textarea",
-            "note": "用||分隔，填写的数字通常为即将跳转到的banner模块对应的序号",
-    	    "default": "1||2||3"
-	    }]
 	}]
 }
