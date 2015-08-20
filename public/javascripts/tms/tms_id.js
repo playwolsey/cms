@@ -200,6 +200,14 @@
             this.$globalSettingSubmitBtn.on('click', function(e) {
                 _this.storeGlobal();
             });
+
+            $('#J_screen').on('click', function(e) {
+                if ($(e.target).hasClass('J_del')) {
+                    _this.deleteMods(e);
+                } else if ($(e.target).hasClass('J_edit')) {
+                    _this.editMods(e);
+                }
+            });
         },
 
         storeGlobal: function(e) {
@@ -218,6 +226,35 @@
             Storage.saveGlobal();
             
             $('#globalModal').modal('hide');
+        },
+
+        deleteMods: function(e) {
+            e.preventDefault();
+
+            if (!confirm('确定删除么')) {
+                return;
+            }
+
+            var $widget = $(e.target).parent('.J_widget');
+
+            //如果移除的是导航模块，删除所有对应的锚点
+            if ($widget.attr('widget-name') === 'nav') {
+                var navdata = JSON.parse('[' + ($widget.attr('widget-data') || '') + ']');
+                navdata.forEach(function(nd, idx){
+                    $('.widget-box', '#J_screen').eq(nd.navhole).removeClass('anchored');
+                });
+            }
+            $(e.target).parent('.J_widget').remove();
+            Storage.save();
+        },
+
+        editMods: function(e) {
+            e.preventDefault();
+
+            current_trigger = $(e.target).parent('.J_widget');
+            var widget = $(e.target).attr('trigger-widget');
+            current_modal = '#J_modal' + widget;
+            $(current_modal).modal();
         }
     };
 
