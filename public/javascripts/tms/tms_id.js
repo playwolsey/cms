@@ -9,7 +9,7 @@
         current_trigger,
         current_modal;
 
-    var Storage, QrView, TMS, DnD;
+    var Storage, QrView, TMS, DnD, ModMoveView;
 
     // 本地存储对象封装
     Storage = {
@@ -178,6 +178,43 @@
         }
     };
 
+	ModMoveView = {
+		$el: $('#J_screen'),
+		$sign: $('<div />').attr('id', 'active-widget-sign'),
+		render: function() {
+			this.$el.on('click', '.up', function(e) {
+				var $widget = $(this).parents('.widget-box'),
+					$prev = $widget.prev();
+
+				if ($prev.hasClass('widget-box')) {
+					$prev.animate({top: 160}, 'normal', 'swing', function() {
+						$prev.css('top', 0);
+					});
+					$widget.css('z-index', 1).animate({top: -170}, 'normal', 'swing', function() {
+						$widget.detach().insertBefore($prev).css({top : 0, 'z-index' : 0});
+						Storage.save();
+					});
+				}
+			});
+
+			this.$el.on('click', '.down', function(e) {
+				var $widget = $(this).parents('.widget-box'),
+					$next = $widget.next();
+
+				if($next.hasClass('widget-box')){
+					$next.animate({top: -160}, 'normal', 'swing', function(){
+						$next.css('top', 0);
+					});
+					$widget.css('z-index', 1).animate({top: 170}, 'normal', 'swing', function(){
+						$widget.detach().insertAfter($next).css({top : 0, 'z-index' : 0});
+						Storage.save();
+					});
+				}
+			});
+		}
+	};
+    
+
     TMS = {
         init: function() {
             this.initNode();
@@ -192,6 +229,7 @@
         render: function() {
             QrView.render();
             DnD.render();
+	        ModMoveView.render();
         },
 
         bindEvent: function() {
