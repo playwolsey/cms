@@ -224,6 +224,8 @@
 
         initNode: function() {
             this.$globalSettingSubmitBtn = $('.J_globalSettingSubmit');
+            this.$screen = $('#J_screen');
+			this.$submitModBtn = $('.J_submitMod');
         },
 
         render: function() {
@@ -239,13 +241,17 @@
                 _this.storeGlobal();
             });
 
-            $('#J_screen').on('click', function(e) {
+            this.$screen.on('click', function(e) {
                 if ($(e.target).hasClass('J_del')) {
                     _this.deleteMods(e);
                 } else if ($(e.target).hasClass('J_edit')) {
                     _this.editMods(e);
                 }
             });
+
+			this.$submitModBtn.on('click', function() {
+                _this.storeModData();
+			});
         },
 
         storeGlobal: function(e) {
@@ -264,6 +270,19 @@
             Storage.saveGlobal();
             
             $('#globalModal').modal('hide');
+        },
+
+        storeModData: function(e) {
+            var diydata = {};
+            
+            $('input, textarea', '#J_modaldiy').each(function(i, el) {
+                diydata[$(el).attr('name')] = $(el).val();
+            });
+
+            current_trigger.attr('widget-diydata', JSON.stringify(diydata));
+
+            Storage.save();
+            $(current_modal).modal('hide');
         },
 
         deleteMods: function(e) {
