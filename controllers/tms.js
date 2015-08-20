@@ -64,7 +64,7 @@ var add = function(req, res) {
             });
         });
     });
-}
+};
 
 var edit = function(req, res) {
     var pageSql = 'select * from tms_page where pid ="' + req.params.id + '"',
