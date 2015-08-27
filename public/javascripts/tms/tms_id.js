@@ -294,13 +294,6 @@
 
             var $widget = $(e.target).parent('.J_widget');
 
-            //如果移除的是导航模块，删除所有对应的锚点
-            if ($widget.attr('widget-name') === 'nav') {
-                var navdata = JSON.parse('[' + ($widget.attr('widget-data') || '') + ']');
-                navdata.forEach(function(nd, idx){
-                    $('.widget-box', '#J_screen').eq(nd.navhole).removeClass('anchored');
-                });
-            }
             $(e.target).parent('.J_widget').remove();
             Storage.save();
         },
